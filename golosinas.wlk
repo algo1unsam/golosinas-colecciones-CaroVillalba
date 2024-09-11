@@ -150,7 +150,8 @@ object tutti {
 
 object mariano {
     const property bolsaGolosinas = [] 
-    
+    const property golosinasDesea = #{}
+
     method comprar(unagolosina){
         self.bolsaGolosinas().add(unagolosina)
     }
@@ -171,5 +172,34 @@ object mariano {
         return !(bolsaGolosinas.forEach({golosina => golosina.precio() <= 10 }).contains(false))  
     }
 
+    method golosinaDeSaborPrimero(unSabor){
+        return (bolsaGolosinas.filter({golosina => golosina.sabor()})).first()
+    }
 
-}
+    method golosinaDeSaborTodos(unSabor) {
+        return bolsaGolosinas.filter({golosina => golosina.sabor()})
+    }
+
+    
+    method sabores() {
+        return bolsaGolosinas.map({golosina => golosina.sabor()}).toSet()
+    }
+
+    method golosinaMasCara(){
+        return (bolsaGolosinas.map({golosina => golosina.precio()})).max()
+    }
+
+    method pesoGolosinas(){
+        return (bolsaGolosinas.map({golosina => golosina.peso()})).sum()
+    }
+
+    method golosinasFaltantes(golosinasDeseadas){
+        return golosinasDesea.add(golosinasDeseadas)
+    }
+    
+    }
+    object julieta {
+        method devolverGolosinas(golosina){
+           mariano.golosinasDesea().remove(golosina)
+        }
+    }
